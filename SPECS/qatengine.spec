@@ -4,7 +4,7 @@
 %global enginesdir %(pkg-config --variable=enginesdir libcrypto)
 
 Name:           qatengine
-Version:        1.4.0
+Version:        1.6.0
 Release:        1%{?dist}
 Summary:        Intel QuickAssist Technology (QAT) OpenSSL Engine
 
@@ -70,6 +70,9 @@ openssl engine -v %{name}
 %{enginesdir}/%{name}.so
 
 %changelog
+* Fri Jun 14 2024 Vladis Dronov <vdronov@redhat.com> - 1.6.0-1
+- Update to qatengine v1.6.0 (RHEL-41076)
+
 * Mon Nov 20 2023 Vladis Dronov <vdronov@redhat.com> - 1.4.0-1
 - Update to qatengine v1.4.0 (RHEL-15636)
 - Enable QAT_HW & QAT SW Co-ex Acceleration for non RHEL distros
