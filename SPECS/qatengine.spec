@@ -13,14 +13,14 @@
 %endif
 
 Name:           qatengine
-Version:        1.7.0
+Version:        1.9.0
 Release:        1%{?dist}
 Summary:        Intel QuickAssist Technology (QAT) OpenSSL Engine
 
 # Most of the source code is BSD, with the following exceptions:
-#  - e_qat.txt, e_qat_err.c, and e_qat_err.h are OpenSSL
-#  - qat_hw_config/* are (BSD or GPLv2), but are not used during compilation
-License:        BSD-3-Clause AND OpenSSL
+# - qat.txt, qat_err.h & qat_err.c files are Apache License 2.0
+# - qat_hw_config/* is (BSD or GPLv2) and not used during compilation
+License:        BSD-3-Clause
 URL:            https://github.com/intel/QAT_Engine
 Source0:        %{url}/archive/v%{version}/%{name}-%{version}.tar.gz
 
@@ -35,7 +35,7 @@ BuildRequires:  openssl-devel >= 1.1.1
 BuildRequires:  qatlib-devel >= 23.02.0
 %if !0%{?rhel}
 BuildRequires:  intel-ipp-crypto-mb-devel >= 1.0.6
-BuildRequires:  intel-ipsec-mb-devel >= 1.3.0
+BuildRequires:  intel-ipsec-mb-devel >= 2.0
 %endif
 BuildRequires:  openssl
 
@@ -79,9 +79,14 @@ openssl engine -v %{name}
 %endif
 
 %changelog
+* Mon Apr 28 2025 Vladis Dronov <vdronov@redhat.com> - 1.9.0-1
+- Update to qatengine v1.9.0 @ 910240d9 (RHEL-73089)
+- Update e_qat_err files license info
+
 * Thu Nov 07 2024 Vladis Dronov <vdronov@redhat.com> - 1.7.0-1
 - Update to qatengine v1.7.0 @ ceb9d4ac (RHEL-47394)
 - Remove qat_contig_mem from upstream package
+- Add a condition to build as an OpenSSL provider
 
 * Fri Mar 22 2024 Vladis Dronov <vdronov@redhat.com> - 1.6.0-1
 - Update to qatengine v1.6.0 (RHEL-20176)
