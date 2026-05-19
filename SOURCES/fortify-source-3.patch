@@ -1,0 +1,11 @@
+--- configure.ac.orig	2026-01-24 22:55:47.111990648 +0100
++++ configure.ac	2026-01-24 22:56:12.351441492 +0100
+@@ -537,7 +537,7 @@ then
+ fi
+ 
+ # Compiler security flags
+-AC_SUBST([cflags_common], ["-Wall -Wformat -Wformat-security -D_FORTIFY_SOURCE=2 -fno-delete-null-pointer-checks -fwrapv -fstack-protector-strong"])
++AC_SUBST([cflags_common], ["-Wall -Wformat -Wformat-security -D_FORTIFY_SOURCE=3 -fno-delete-null-pointer-checks -fwrapv -fstack-protector-strong"])
+ 
+ # Disable insecure algorithms by default
+ if test "x$enable_qat_insecure_algorithms" = "xyes"
