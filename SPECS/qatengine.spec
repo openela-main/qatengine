@@ -13,13 +13,12 @@
 %endif
 
 Name:           qatengine
-Version:        1.9.0
+Version:        2.0.0
 Release:        1%{?dist}
 Summary:        Intel QuickAssist Technology (QAT) OpenSSL Engine
 
 # Most of the source code is BSD, with the following exceptions:
 # - qat.txt, qat_err.h & qat_err.c files are Apache License 2.0
-# - qat_hw_config/* is (BSD or GPLv2) and not used during compilation
 License:        BSD-3-Clause
 URL:            https://github.com/intel/QAT_Engine
 Source0:        %{url}/archive/v%{version}/%{name}-%{version}.tar.gz
@@ -38,6 +37,8 @@ BuildRequires:  intel-ipp-crypto-mb-devel >= 1.0.6
 BuildRequires:  intel-ipsec-mb-devel >= 2.0
 %endif
 BuildRequires:  openssl
+
+Patch1: fortify-source-3.patch
 
 %description
 This package provides the Intel QuickAssist Technology OpenSSL Engine
@@ -79,6 +80,9 @@ openssl engine -v %{name}
 %endif
 
 %changelog
+* Fri Jan 23 2026 Vladislav Dronov <vdronov@redhat.com> - 2.0.0-1
+- Update to qatengine v2.0.0 @ 4498412a (RHEL-143913)
+
 * Mon Apr 28 2025 Vladis Dronov <vdronov@redhat.com> - 1.9.0-1
 - Update to qatengine v1.9.0 @ 910240d9 (RHEL-73089)
 - Update e_qat_err files license info
