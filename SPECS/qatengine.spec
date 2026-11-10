@@ -13,7 +13,7 @@
 %endif
 
 Name:           qatengine
-Version:        2.0.0
+Version:        2.1.0
 Release:        1%{?dist}
 Summary:        Intel QuickAssist Technology (QAT) OpenSSL Engine
 
@@ -38,8 +38,6 @@ BuildRequires:  intel-ipsec-mb-devel >= 2.0
 %endif
 BuildRequires:  openssl
 
-Patch1: fortify-source-3.patch
-
 %description
 This package provides the Intel QuickAssist Technology OpenSSL Engine
 (an OpenSSL Plug-In Engine) which provides cryptographic acceleration
@@ -48,6 +46,13 @@ enabled Intel platforms.
 
 %prep
 %autosetup -n QAT_Engine-%{version}
+
+# RedHat's annocheck security hardening verification returns a warning:
+# Hardened: ./usr/lib64/ossl-modules/qatprovider.so: FAIL: optimization
+# test because level too low (based upon annobin data) (lto:value_barrier)
+# This is a false positive, value_barrier() function in qat_constant_time.h
+# is intentionally built with "#pragma GCC optimize ("O0")" to enable
+# constant-time side-channel protection. Waive this annocheck warning.
 
 %build
 autoreconf -ivf
@@ -80,6 +85,10 @@ openssl engine -v %{name}
 %endif
 
 %changelog
+* Tue Jun 30 2026 Vladislav Dronov <vdronov@redhat.com> - 2.1.0-1
+- Update to qatengine v2.1.0 @ c7b07156 (RHEL-188510)
+- Add annocheck warning explanation
+
 * Fri Jan 23 2026 Vladislav Dronov <vdronov@redhat.com> - 2.0.0-1
 - Update to qatengine v2.0.0 @ 4498412a (RHEL-143912)
 
